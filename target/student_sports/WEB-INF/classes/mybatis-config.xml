@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!--设置日志使用log4f 防止加了spring-context 后不起作用-->
+ 	<settings>
+		<setting name="logImpl" value="log4j" />
+	</settings> 
+	
+	<!-- 类型别名设置 -->
+ 	<!--<typeAliases>
+ 		<typeAlias alias="Employee" type="com.bean.Employee"/>
+		<typeAlias alias="Department" type="com.bean.Department"/>
+	</typeAliases>-->
+	
+	<!--映射文件的设置  -->
+	<!--<mappers>
+		<mapper resource="com/mapper/EmployeeDaoMapper.xml"/>
+		<mapper resource="com/mapper/DepartmentDaoMapper.xml"/>
+	</mappers>-->
+</configuration>
