@@ -24,8 +24,23 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
+            //点击之后去往注册界面
             $(".regBut").click(function () {
                 location.href="user/show_reg";
+            });
+            //判断账号非空
+            $("#userAccount_id").change(function () {
+                var username = $("#userAccount_id").val();
+                if(username == null || username == ""){
+                    alert("账户不能为空");
+                }
+            });
+            //判断密码非空
+            $("#password_id").change(function () {
+                var password = $("#password_id").val();
+                if(password == null || password == ""){
+                    alert("密码不能为空");
+                }
             });
         })
     </script>
@@ -39,12 +54,13 @@
         <form action="user/login" method="post">
             <div class="line">
                 <img class="smallImg" src="img/icon1.png" />
-                <input placeholder="请输入账号" type="text" name="username" id="username_id" />
+                <input placeholder="请输入账号" type="text" name="userAccount" id="userAccount_id" />
             </div>
             <div class="line">
                 <img class="smallImg" src="img/icon2.png" />
                 <input placeholder="请输入密码" type="password" name="password" id="password_id" />
             </div>
+            <span style="color: red">${msg}</span>
             <input type="submit" class="userBut" value="用户登录"/>
         </form>
             <%--<button type="button" class="adminBut">管理员登录</button>--%>

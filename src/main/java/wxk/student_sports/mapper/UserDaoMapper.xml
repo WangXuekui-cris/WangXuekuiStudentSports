@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wxk.student_sports.dao.UserDao">
+    <!--根据account获取到学生对象的账号、密码、姓名-->
+    <select id="getUser" resultType="User">
+        SELECT account,password,name FROM student WHERE account=#{account};
+    </select>
+
+    <!--根据account获取学生记录数-->
+    <select id="checkUser" resultType="Integer">
+        SELECT count(*) FROM student WHERE account=#{account};
+    </select>
+
+
+
+</mapper>

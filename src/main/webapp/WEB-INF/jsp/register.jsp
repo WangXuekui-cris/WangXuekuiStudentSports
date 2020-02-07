@@ -18,8 +18,29 @@
     <title>注册</title>
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+            //判断用户是否存在
+            function isExists() {
+                //获取用户输入的账号
+                var account = $("#userAccount").val();
+                $.ajax({
+                    url: "user/check",//请求路径
+                    type: "post", //请求方式
+                    data: "account="+account, //传给后台的值
+                    dataType:"text", //返回类型
+                    success:function (responseContent) {
+                        //如果返回值为"true" 提示信息；反之不提示；
+                        if (responseContent == "true"){
+                            $("#account_msg").text("该账户已存在");
+                        }else{
+                            $("#account_msg").text("");
+                        }
+                    }
+                });
+            }
+    </script>
 </head>
 <body>
 <div class="top">运功会&nbsp;·&nbsp;用实力说明一切</div>
@@ -29,7 +50,8 @@
                 <div class="form-group">
                     <label for="userAccount" class="col-sm-2 control-label">学号：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="userAccount" placeholder="请输入学号">
+                        <input type="text" class="form-control" id="userAccount" placeholder="请输入学号" onchange="isExists()">
+                        <span style="color: red" id="account_msg"></span>
                     </div>
                 </div>
                 <div class="form-group">

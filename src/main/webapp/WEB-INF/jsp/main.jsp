@@ -36,7 +36,7 @@
 		</div>
 		<div class="top">
 			<div class="leftTiyle" id="flTitle">业务人员管理</div>
-			<div class="thisUser">当前用户：小UU</div>
+			<div class="thisUser">当前用户：${user.name}</div>
 		</div>
 		<div class="content">HELLO WORD</div>
 	</body>

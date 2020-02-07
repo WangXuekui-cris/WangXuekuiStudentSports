@@ -34,8 +34,7 @@
 	</bean>
 	<!--配置Mapper扫描器  -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.dao"></property>
+		<property name="basePackage" value="wxk.student_sports.dao"></property>
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-	<context:component-scan base-package="wxk.student_sports.service"/>
 </beans>

@@ -13,6 +13,7 @@
 	<!--指定IOC容器扫描的包  -->
 	<context:component-scan base-package="wxk.student_sports.controller"/>
 	<context:component-scan base-package="wxk.student_sports.dao"/>
+	<context:component-scan base-package="wxk.student_sports.serviceImpl"/>
 
 	<mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
