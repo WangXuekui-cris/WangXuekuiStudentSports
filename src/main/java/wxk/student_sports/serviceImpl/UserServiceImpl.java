@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService {
         int i = userDao.checkAccount(account);
         return i;
     }
+    //添加学生账号信息
+    @Override
+    public int addUser(User user) {
+        int i = userDao.addUser(user);
+        return i;
+    }
 }

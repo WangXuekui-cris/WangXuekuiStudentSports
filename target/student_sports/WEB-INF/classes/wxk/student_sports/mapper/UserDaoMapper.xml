@@ -19,6 +19,12 @@
         SELECT count(*) FROM student WHERE account=#{account};
     </select>
 
+    <!--添加学生账号-->
+    <insert id="addUser" parameterType="User">
+        insert into student(account,password,name,age,gender,academyId) values
+         (#{account},#{password},#{name},#{age},#{gender},#{academy.academyId})
+    </insert>
+
 
 
 </mapper>

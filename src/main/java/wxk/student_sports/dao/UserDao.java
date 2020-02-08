@@ -21,4 +21,6 @@ public interface UserDao {
     ArrayList<Academy> getAllAcademy();
     //获取学生记录数
     int checkAccount(int account);
+    //注册学生账号
+    int addUser(User user);
 }

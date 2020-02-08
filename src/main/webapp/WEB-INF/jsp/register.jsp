@@ -190,7 +190,8 @@
                 <div class="form-group">
                     <label>学院</label>
                     <div class="col-sm-5">
-                        <select class="form-control" name="academy">
+                        //因为user类的academy属性为一对象
+                        <select class="form-control" name="academy.academyId">
                             <c:forEach items="${academyList}" var="item">
                                 <option selected="selected" value="${item.academyId}">${item.academyName}</option>
                             </c:forEach>

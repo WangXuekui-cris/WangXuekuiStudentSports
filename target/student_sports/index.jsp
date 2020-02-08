@@ -54,7 +54,7 @@
         <form action="user/login" method="post">
             <div class="line">
                 <img class="smallImg" src="img/icon1.png" />
-                <input placeholder="请输入账号" type="text" name="userAccount" id="userAccount_id" />
+                <input placeholder="请输入账号" value="${user.account}" type="text" name="userAccount" id="userAccount_id" />
             </div>
             <div class="line">
                 <img class="smallImg" src="img/icon2.png" />

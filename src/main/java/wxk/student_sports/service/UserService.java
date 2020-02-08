@@ -19,4 +19,6 @@ public interface UserService {
     ArrayList<Academy> getAllAcademy();
     //获取学生记录数
     int checkAccount(int account);
+    //添加学生账号
+    int addUser(User user);
 }

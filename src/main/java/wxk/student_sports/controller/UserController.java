@@ -89,20 +89,20 @@ public class UserController {
         return null;
     }
 
+    /**
+     *
+     * @param user 直接使用SpringMVC实体类与注册界面参数对应的方法接收参数
+     * @param session 注册成功后将用户账号显示在输入框
+     * @return
+     */
     @RequestMapping("/reg")
-    public void register(User user,Academy academy,HttpServletRequest request){
-        int account = user.getAccount();
-        String password = user.getPassword();
-        String username = user.getName();
-        int age = user.getAge();
-        String gender = user.getGender();
-        //String academy2 = request.getParameter("academyID");
-        Integer academyId1 = user.getAcademy().getAcademyId();
-        Integer academyId = academy.getAcademyId();
-        Academy academy1 = user.getAcademy();
-        //String academy = request.getParameter("academy");
-        //Integer academy = user.getAcademy().getAcademyId();
-        System.out.println(account+","+password+","+username+","+age+","+gender+","+academyId);
-
+    public String register(User user,HttpSession session){
+        int i = userService.addUser(user);
+        session.setAttribute("user","user");
+        if(i > 0){
+            return "../../index";
+        }else{
+            return "register";
+        }
     }
 }
