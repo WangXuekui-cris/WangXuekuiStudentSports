@@ -8,22 +8,22 @@ package wxk.student_sports.entity;
  * @date 2020/2/7 13:05
  */
 public class Academy {
-    private int academyId;
+    private Integer academyId;
     private String academyName;
 
     public Academy() {
     }
 
-    public Academy(int academyId, String academyName) {
+    public Academy(Integer academyId, String academyName) {
         this.academyId = academyId;
         this.academyName = academyName;
     }
 
-    public int getAcademyId() {
+    public Integer getAcademyId() {
         return academyId;
     }
 
-    public void setAcademyId(int academyId) {
+    public void setAcademyId(Integer academyId) {
         this.academyId = academyId;
     }
 

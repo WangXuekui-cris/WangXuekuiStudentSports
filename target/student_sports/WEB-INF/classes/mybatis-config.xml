@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!--设置日志使用log4f 防止加了spring-context 后不起作用-->
+ 	<settings>
+		<setting name="logImpl" value="log4j" />
+	</settings> 
+	
+	<!-- 类型别名设置 -->
+ 	<typeAliases>
+ 		<typeAlias alias="User" type="wxk.student_sports.entity.User"/>
+		<typeAlias alias="Academy" type="wxk.student_sports.entity.Academy"/>
+	</typeAliases>
+	
+	<!--映射文件的设置  -->
+	<mappers>
+		<mapper resource="wxk/student_sports/mapper/UserDaoMapper.xml"/>
+		<!--<mapper resource="com/mapper/UserDaoMapper.xml"/>-->
+	</mappers>
+</configuration>

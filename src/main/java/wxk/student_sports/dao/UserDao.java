@@ -1,7 +1,10 @@
 package wxk.student_sports.dao;
 
 import org.springframework.stereotype.Repository;
+import wxk.student_sports.entity.Academy;
 import wxk.student_sports.entity.User;
+
+import java.util.ArrayList;
 
 /**
  * @author 王学奎
@@ -14,6 +17,8 @@ import wxk.student_sports.entity.User;
 public interface UserDao {
     //根据账号获取user对象
     User getUser(int account);
+    //查询所有学院id和name
+    ArrayList<Academy> getAllAcademy();
     //获取学生记录数
-    int checkUser(int account);
+    int checkAccount(int account);
 }

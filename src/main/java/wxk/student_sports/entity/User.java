@@ -9,41 +9,42 @@ package wxk.student_sports.entity;
  */
 public class User {
     //账号，即学号
-    private int account;
+    private Integer account;
     //密码
     private String password;
     //姓名
     private String name;
     //年龄
-    private int age;
+    private Integer age;
     //性别
     private String gender;
-    //学院id
-    private Academy academyId;
+    //学院
+    private Academy academy;
 
     public User() {
     }
 
-    public User(int account, String password, String name) {
+    public User(Integer account, String password, String name) {
         this.account = account;
         this.password = password;
         this.name = name;
     }
 
-    public User(int account, String password, String name, int age, String gender, Academy academyId) {
+    public User(Integer account, String password, String name, Integer age, String gender, Academy academy) {
         this.account = account;
         this.password = password;
         this.name = name;
         this.age = age;
         this.gender = gender;
-        this.academyId = academyId;
+        this.academy = academy;
     }
 
-    public int getAccount() {
+
+    public Integer getAccount() {
         return account;
     }
 
-    public void setAccount(int account) {
+    public void setAccount(Integer account) {
         this.account = account;
     }
 
@@ -63,11 +64,11 @@ public class User {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -79,12 +80,12 @@ public class User {
         this.gender = gender;
     }
 
-    public Academy getAcademyId() {
-        return academyId;
+    public Academy getAcademy() {
+        return academy;
     }
 
-    public void setAcademyId(Academy academyId) {
-        this.academyId = academyId;
+    public void setAcademy(Academy academy) {
+        this.academy = academy;
     }
 
     @Override
@@ -95,7 +96,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
-                ", academyId=" + academyId +
+                ", academy=" + academy +
                 '}';
     }
 }

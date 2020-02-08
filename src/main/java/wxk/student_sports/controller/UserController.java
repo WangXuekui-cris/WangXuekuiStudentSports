@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import wxk.student_sports.entity.Academy;
 import wxk.student_sports.entity.User;
 import wxk.student_sports.service.UserService;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 /**
  * @author 王学奎
@@ -28,7 +30,11 @@ public class UserController {
 
     //到注册界面
     @RequestMapping("/show_reg")
-    public String showRegister(){
+    public String showRegister(Model model){
+        //获取所有的学院信息
+        ArrayList<Academy> allAcademy = userService.getAllAcademy();
+        //响应到注册界面
+        model.addAttribute("academyList",allAcademy);
         return "register";
     }
 
@@ -66,12 +72,12 @@ public class UserController {
      * @throws IOException
      */
     @RequestMapping("/check")
-    public String check(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String checkAccount(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //获取前台输入的账号
         String account = request.getParameter("account");
         Integer userAccount = Integer.valueOf(account);
         //获取查询的记录数
-        int check = userService.check(userAccount);
+        int check = userService.checkAccount(userAccount);
         //响应给前台
         PrintWriter out = response.getWriter();
         //如果记录数check大于0，说明该账号已存在，返回"true";否则，返回"false"
@@ -81,5 +87,22 @@ public class UserController {
             out.print("false");
         }
         return null;
+    }
+
+    @RequestMapping("/reg")
+    public void register(User user,Academy academy,HttpServletRequest request){
+        int account = user.getAccount();
+        String password = user.getPassword();
+        String username = user.getName();
+        int age = user.getAge();
+        String gender = user.getGender();
+        //String academy2 = request.getParameter("academyID");
+        Integer academyId1 = user.getAcademy().getAcademyId();
+        Integer academyId = academy.getAcademyId();
+        Academy academy1 = user.getAcademy();
+        //String academy = request.getParameter("academy");
+        //Integer academy = user.getAcademy().getAcademyId();
+        System.out.println(account+","+password+","+username+","+age+","+gender+","+academyId);
+
     }
 }

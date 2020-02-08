@@ -1,6 +1,9 @@
 package wxk.student_sports.service;
 
+import wxk.student_sports.entity.Academy;
 import wxk.student_sports.entity.User;
+
+import java.util.ArrayList;
 
 /**
  * @author 王学奎
@@ -12,6 +15,8 @@ import wxk.student_sports.entity.User;
 public interface UserService {
     //根据账号获取一个user对象
     User login(User user);
+    //获取所有的学院记录
+    ArrayList<Academy> getAllAcademy();
     //获取学生记录数
-    int check(int account);
+    int checkAccount(int account);
 }

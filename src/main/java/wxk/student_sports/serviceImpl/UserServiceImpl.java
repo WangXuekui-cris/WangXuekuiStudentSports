@@ -3,8 +3,11 @@ package wxk.student_sports.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wxk.student_sports.dao.UserDao;
+import wxk.student_sports.entity.Academy;
 import wxk.student_sports.entity.User;
 import wxk.student_sports.service.UserService;
+
+import java.util.ArrayList;
 
 /**
  * @author 王学奎
@@ -30,14 +33,21 @@ public class UserServiceImpl implements UserService {
         return user1;
     }
 
+    //获取学院的所有信息
+    @Override
+    public ArrayList<Academy> getAllAcademy() {
+        ArrayList<Academy> list = userDao.getAllAcademy();
+        return list;
+    }
+
     /**
      *
      * @param account 传入的学生账号
      * @return 返回根据account查询到的学生记录数
      */
     @Override
-    public int check(int account) {
-        int i = userDao.checkUser(account);
+    public int checkAccount(int account) {
+        int i = userDao.checkAccount(account);
         return i;
     }
 }
