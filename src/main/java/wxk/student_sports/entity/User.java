@@ -24,10 +24,12 @@ public class User {
     public User() {
     }
 
-    public User(Integer account, String password, String name) {
+    public User(Integer account, String password, String name,Integer age,String gender) {
         this.account = account;
         this.password = password;
         this.name = name;
+        this.age = age;
+        this.gender = gender;
     }
 
     public User(Integer account, String password, String name, Integer age, String gender, Academy academy) {

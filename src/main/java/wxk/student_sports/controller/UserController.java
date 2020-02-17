@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import wxk.student_sports.entity.Academy;
+import wxk.student_sports.entity.Game;
 import wxk.student_sports.entity.User;
+import wxk.student_sports.service.UserMenuService;
 import wxk.student_sports.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  * @author 王学奎
  * @version 1.0
  * @className UserController
- * @description <功能描述>
+ * @description <登录和注册>
  * @date 2020/2/2 22:46
  */
 @Controller
@@ -27,6 +29,8 @@ import java.util.ArrayList;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserMenuService userMenuService;
 
     //到注册界面
     @RequestMapping("/show_reg")
@@ -37,7 +41,6 @@ public class UserController {
         model.addAttribute("academyList",allAcademy);
         return "register";
     }
-
     /**
      * 验证登录
      * @param request 用于获取前台输入的账户和密码
@@ -59,9 +62,27 @@ public class UserController {
             session.setAttribute("user",login);
             return "main";
         }else{
-            model.addAttribute("msg","账户或密码错误");
+            model.addAttribute("msg","账号或密码错误");
             return "../../index";
         }
+    }
+    @RequestMapping("/gameInfo")
+    public String gameInfo(Model model){
+        //获取所有的赛事信息
+        ArrayList<Game> gameList = userMenuService.getAllGame();
+        //将赛事信息响应到前台
+        model.addAttribute("gameList", gameList);
+        return "gameInfo";
+    }
+
+
+    @RequestMapping("/gameResult")
+    public String gameResult(){
+        return "gameResult";
+    }
+    @RequestMapping("/resultPrint")
+    public String resultPrint(){
+        return "resultPrint";
     }
 
     /**

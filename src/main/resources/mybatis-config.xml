@@ -13,11 +13,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  	<typeAliases>
  		<typeAlias alias="User" type="wxk.student_sports.entity.User"/>
 		<typeAlias alias="Academy" type="wxk.student_sports.entity.Academy"/>
+		<typeAlias alias="Game" type="wxk.student_sports.entity.Game"/>
 	</typeAliases>
 	
 	<!--映射文件的设置  -->
 	<mappers>
 		<mapper resource="wxk/student_sports/mapper/UserDaoMapper.xml"/>
-		<!--<mapper resource="com/mapper/UserDaoMapper.xml"/>-->
+		<mapper resource="wxk/student_sports/mapper/UserMenuDaoMapper.xml"/>
 	</mappers>
 </configuration>

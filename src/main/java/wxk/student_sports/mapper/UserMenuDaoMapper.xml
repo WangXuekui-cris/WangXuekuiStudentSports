@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wxk.student_sports.dao.UserMenuDao">
+    <!--查询所有的赛事信息-->
+    <select id="getAllGameInfo" resultType="Game">
+        SELECT
+            g.gameID,
+            g.gameName,
+            g.startTime,
+            g.endTime,
+            g.totalNum,
+            g.ptcpNum,
+            g.spNum
+        FROM
+            game g
+    </select>
+
+    <!--检查该账号下是否有报名信息-->
+    <select id="checkRegInfo" resultType="Integer" parameterType="Integer">
+        select COUNT(*)
+        from student s,game g,reginfo r
+        where s.account = r.studentAccount and g.gameID = r.gameID and s.account=#{account}
+    </select>
+
+    <!--查询该账号所有的报名信息-->
+    <select id="getRegInfo" resultType="Game" parameterType="Integer">
+        select g.gameName,g.startTime,g.endTime
+        from student s,game g,reginfo r
+        where s.account = r.studentAccount and g.gameID = r.gameID and s.account=#{account}
+    </select>
+
+    <!--查询指定赛事信息-->
+    <select id="getGameInfo" resultType="Game">
+        select * from game where gameID = #{gameID}
+    </select>
+
+    <!--查询该账户下是否已经报名此赛事-->
+    <select id="getGameByUser" resultType="Integer">
+        select COUNT(*)
+        from reginfo r,student s,game g
+        where s.account=r.studentaccount and r.gameID=g.gameID
+        and s.account=#{account} and g.gameID=#{gameID}
+    </select>
+
+    <!--  报名赛事  -->
+    <insert id="signGame">
+        insert into reginfo(studentAccount,gameID) values(#{account},#{gameID});
+    </insert>
+</mapper>

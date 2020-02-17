@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author 王学奎
  * @version 1.0
  * @className UserServiceImpl
- * @description <功能描述>
+ * @description <登录和注册>
  * @date 2020/2/7 13:57
  */
 @Service("userServiceImpl")
