@@ -6,7 +6,7 @@
 <mapper namespace="wxk.student_sports.dao.UserDao">
     <!--根据account获取到学生对象的账号、密码、姓名-->
     <select id="getUser" resultType="User">
-        SELECT account,password,name,age,gender FROM student WHERE account=#{account};
+        SELECT account,password,name,age,gender,userState FROM student WHERE account=#{account};
     </select>
 
     <!--查询所有的学院-->

@@ -12,8 +12,7 @@
             g.startTime,
             g.endTime,
             g.totalNum,
-            g.ptcpNum,
-            g.spNum
+            g.signNum
         FROM
             game g
     </select>
@@ -27,7 +26,7 @@
 
     <!--查询该账号所有的报名信息-->
     <select id="getRegInfo" resultType="Game" parameterType="Integer">
-        select g.gameName,g.startTime,g.endTime
+        select g.gameID,g.gameName,g.startTime,g.endTime
         from student s,game g,reginfo r
         where s.account = r.studentAccount and g.gameID = r.gameID and s.account=#{account}
     </select>
@@ -49,4 +48,39 @@
     <insert id="signGame">
         insert into reginfo(studentAccount,gameID) values(#{account},#{gameID});
     </insert>
+
+    <!-- 更新赛事报名人数   -->
+    <update id="updateGame">
+        update game set signNum=signNum+1 where gameID=#{gameID};
+    </update>
+
+    <!--  取消报名赛事  -->
+    <delete id="cancel">
+        delete from reginfo where studentAccount=#{account} and gameID=#{gameID}
+    </delete>
+
+    <!-- 更新取消后的赛事报名人数   -->
+    <update id="updateGameAfterCancel">
+        update game set signNum=signNum-1 where gameID=#{gameID};
+    </update>
+
+    <!--  查看赛事规则  -->
+    <select id="selectRule" resultType="String">
+        select content from rule where gameID=#{gameID};
+    </select>
+
+    <!--  查询指定账号的赛事成绩  -->
+    <select id="selectResult" resultMap="scoreMap">
+        SELECT g.gameName,s.score
+        FROM score s,game g
+        where g.gameID=s.gID and s.sAccount=#{account}
+    </select>
+    <resultMap id="scoreMap" type="Score">
+        <id property="scoreID" column="scoreID"/>
+        <result property="score" column="score"/>
+        <association property="game" javaType="Game">
+            <id property="gameID" column="id"/>
+            <result property="gameName" column="gameName"/>
+        </association>
+    </resultMap>
 </mapper>

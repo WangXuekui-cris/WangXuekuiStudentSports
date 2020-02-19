@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wxk.student_sports.dao.UserMenuDao;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.Score;
 import wxk.student_sports.service.UserMenuService;
 
 import java.util.ArrayList;
@@ -85,5 +86,54 @@ public class UserMenuServiceImpl implements UserMenuService {
     public int signGame(int account, int gameID) {
         int i = userMenuDao.signGame(account, gameID);
         return i;
+    }
+
+    /**
+     * 更新报名人数
+     * @param gameId
+     */
+    @Override
+    public void updateGame(int gameId) {
+        userMenuDao.updateGame(gameId);
+    }
+
+    /**
+     * 查看指定赛事的规则
+     * @param gameID
+     * @return
+     */
+    @Override
+    public String selectRule(int gameID) {
+        String content = userMenuDao.selectRule(gameID);
+        return content;
+    }
+
+    /**
+     * 查询该账户的所有赛事成绩
+     * @param account 用户账号
+     * @return
+     */
+    @Override
+    public ArrayList<Score> selectResult(int account) {
+        ArrayList<Score> scores = userMenuDao.selectResult(account);
+        return scores;
+    }
+
+    /**
+     * 取消报名赛事
+     * @param account 当前登录账号
+     * @param gameID 指定赛事
+     * @return
+     */
+    @Override
+    public Integer cancel(int account, int gameID) {
+        Integer cancel = userMenuDao.cancel(account, gameID);
+        return cancel;
+    }
+
+    @Override
+    public Integer updateGameAfterCancel(int gameID) {
+        Integer cancel = userMenuDao.updateGameAfterCancel(gameID);
+        return cancel;
     }
 }

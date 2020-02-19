@@ -8,6 +8,7 @@ package wxk.student_sports.entity;
  * @date 2020/2/7 13:04
  */
 public class User {
+    private Integer id;
     //账号，即学号
     private Integer account;
     //密码
@@ -20,11 +21,14 @@ public class User {
     private String gender;
     //学院
     private Academy academy;
+    //用户权限
+    private Integer userState;
 
     public User() {
     }
 
-    public User(Integer account, String password, String name,Integer age,String gender) {
+    public User(Integer userState,Integer account, String password, String name,Integer age,String gender) {
+        this.userState = userState;
         this.account = account;
         this.password = password;
         this.name = name;
@@ -32,15 +36,24 @@ public class User {
         this.gender = gender;
     }
 
-    public User(Integer account, String password, String name, Integer age, String gender, Academy academy) {
+    public User(Integer id,Integer account, String password, String name, Integer age, String gender, Academy academy,Integer userState) {
+        this.id = id;
         this.account = account;
         this.password = password;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.academy = academy;
+        this.userState = userState;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Integer getAccount() {
         return account;
@@ -90,15 +103,25 @@ public class User {
         this.academy = academy;
     }
 
+    public Integer getUserState() {
+        return userState;
+    }
+
+    public void setUserState(Integer userState) {
+        this.userState = userState;
+    }
+
     @Override
     public String toString() {
         return "User{" +
+                "id=" + id +
                 "account=" + account +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 ", gender='" + gender + '\'' +
                 ", academy=" + academy +
+                ", userState=" + userState +
                 '}';
     }
 }

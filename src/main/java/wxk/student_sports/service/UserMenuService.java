@@ -1,6 +1,7 @@
 package wxk.student_sports.service;
 
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.Score;
 
 import java.util.ArrayList;
 
@@ -24,4 +25,14 @@ public interface UserMenuService {
     int getGameByUser(int account,int gameID);
     //报名赛事
     int signGame(int account,int gameID);
+    //更新赛事报名人数
+    void updateGame(int gameId);
+    //查看赛事规则
+    String selectRule(int gameID);
+    //查询成绩
+    ArrayList<Score> selectResult(int account);
+    //取消报名赛事
+    Integer cancel(int account, int gameId);
+    //更新取消报名后的人数
+    Integer updateGameAfterCancel(int gameID);
 }

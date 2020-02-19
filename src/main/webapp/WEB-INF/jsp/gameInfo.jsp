@@ -47,9 +47,16 @@
                         alert("当前阶段不能报名");
                     }else {
                         alert("报名成功");
+                        location.reload();
                     }
                 }
             });
+        }
+
+        //查看规则
+        function rule(gameID) {
+            var url = "userMenu/rule?gameID="+gameID;
+            window.open(url,'height=400, width=400, top=100, left=100, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no');
         }
     </script>
 </head>
@@ -62,7 +69,6 @@
                 <th>结束时间</th>
                 <th>预计人数</th>
                 <th>报名人数</th>
-                <th>剩余人数</th>
                 <th>赛事状态</th>
                 <th>操作</th>
             </tr>
@@ -75,8 +81,7 @@
                     <td>${games.startTime}</td>
                     <td>${games.endTime}</td>
                     <td>${games.totalNum}</td>
-                    <td>${games.ptcpNum}</td>
-                    <td>${games.spNum}</td>
+                    <td>${games.signNum}</td>
                     <td >
                         <div  id="${status.index + 1}">
                             <script type="text/javascript">
@@ -86,7 +91,7 @@
                     </td>
                     <td>
                         <button type="button" class="btn btn-default" onclick="sign(${games.gameID})">报名</button>
-                        <button type="button" class="btn btn-default">查看</button>
+                        <button type="button" class="btn btn-default" onclick="rule(${games.gameID})">查看</button>
                     </td>
                 </tr>
             </c:forEach>

@@ -2,9 +2,11 @@ package wxk.student_sports.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.Score;
 import wxk.student_sports.entity.User;
 import wxk.student_sports.service.UserMenuService;
 
@@ -53,6 +55,52 @@ public class UserMenuController {
         }
     }
 
+    /**
+     * 取消报名
+     * @param gameID
+     * @param session
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @Transactional
+    @RequestMapping("/cancel")
+    public String cancel(String gameID,HttpSession session,HttpServletResponse response) throws IOException {
+        //获取当前系统时间
+        Date date =new Date();
+        Timestamp currentTime =new Timestamp(date.getTime());
+        //获取前台传过来的赛事ID
+        int gameId = Integer.parseInt(gameID);
+        //获取当前登录账号和学生id
+        User user = (User) session.getAttribute("user");
+        int account = user.getAccount();
+        //获取响应
+        PrintWriter out = response.getWriter();
+        //获取指定赛事信息
+        Game game = userMenuService.getGameInfo(gameId);
+        if (currentTime.after(game.getStartTime())){
+            out.print("false");
+        }else{
+            //取消报名赛事
+            Integer cancel = userMenuService.cancel(account, gameId);
+            if (cancel > 0){
+                out.print("true");
+                //更新报名人数
+                userMenuService.updateGameAfterCancel(gameId);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 报名赛事
+     * @param gameID
+     * @param session
+     * @param response
+     * @return
+     * @throws IOException
+     */
+
     @RequestMapping("/sign")
     public String signGame(String gameID, HttpSession session, HttpServletResponse response) throws IOException {
         //获取当前系统时间
@@ -71,16 +119,46 @@ public class UserMenuController {
         int num = userMenuService.getGameByUser(account,gameId);
         if(num > 0){
             out.print("已报名");
-        }else if(game.getSpNum() <= 0){
-            out.print("满员");
         }else{//用户未报名
             if (currentTime.after(game.getStartTime())){
                 out.print("不能报名");
             }else{
                 //报名赛事
                 userMenuService.signGame(account, gameId);
+                userMenuService.updateGame(gameId);
             }
         }
         return null;
+    }
+
+    /**
+     * 查看规则
+     * @param gameID
+     * @return
+     */
+    @RequestMapping("/rule")
+    public String rule(String gameID,Model model) throws IOException {
+        //获取前台传过来的赛事ID
+        int gameId= Integer.parseInt(gameID);
+        String rule = userMenuService.selectRule(gameId);
+        model.addAttribute("rule",rule);
+        return "rule";
+    }
+
+    /**
+     * 获取当前登录下账号的赛事成绩
+     * @param session
+     * @param model
+     * @return
+     */
+    @RequestMapping("/gameResult")
+    public String gameResult(HttpSession session,Model model){
+        //获取当前登录账号
+        User user = (User) session.getAttribute("user");
+        int account = user.getAccount();
+        //查询成绩
+        ArrayList<Score> scores = userMenuService.selectResult(account);
+        model.addAttribute("scores",scores);
+        return "gameResult";
     }
 }

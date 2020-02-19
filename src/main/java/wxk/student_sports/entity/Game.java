@@ -19,21 +19,18 @@ public class Game {
     //需要的人数
     private Integer totalNum;
     //已报名的人数
-    private Integer ptcpNum;
-    //剩余人数
-    private Integer spNum;
+    private Integer signNum;
 
     public Game() {
     }
 
-    public Game(Integer gameID, String gameName, Timestamp startTime, Timestamp endTime, Integer totalNum, Integer ptcpNum, Integer spNum) {
+    public Game(Integer gameID, String gameName, Timestamp startTime, Timestamp endTime, Integer totalNum, Integer signNum) {
         this.gameID = gameID;
         this.gameName = gameName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.totalNum = totalNum;
-        this.ptcpNum = ptcpNum;
-        this.spNum = spNum;
+        this.signNum = signNum;
     }
 
     public Integer getGameID() {
@@ -76,20 +73,12 @@ public class Game {
         this.totalNum = totalNum;
     }
 
-    public Integer getPtcpNum() {
-        return ptcpNum;
+    public Integer getSignNum() {
+        return signNum;
     }
 
-    public void setPtcpNum(Integer ptcpNum) {
-        this.ptcpNum = ptcpNum;
-    }
-
-    public Integer getSpNum() {
-        return spNum;
-    }
-
-    public void setSpNum(Integer spNum) {
-        this.spNum = spNum;
+    public void setSignNum(Integer signNum) {
+        this.signNum = signNum;
     }
 
     @Override
@@ -100,8 +89,7 @@ public class Game {
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", totalNum=" + totalNum +
-                ", ptcpNum=" + ptcpNum +
-                ", spNum=" + spNum +
+                ", signNum=" + signNum +
                 '}';
     }
 }

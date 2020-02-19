@@ -18,10 +18,31 @@
     <title>成绩打印</title>
     <link rel="stylesheet" href="css/page.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <div style="text-align: center; font-size: 30pt; margin-top: 150px;">
-        这里是赛事成绩
+    <div style="text-align: center; font-size: 30pt; margin-top: 50px;">
+        <table class="table table-bordered" align="center">
+            <thead>
+            <tr>
+                <th>学生账号</th>
+                <th>学生姓名</th>
+                <th>赛事名称</th>
+                <th>赛事成绩</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${scores}" var="score">
+                <tr>
+                    <td>${user.account}</td>
+                    <td>${user.name}</td>
+                    <td>${score.game.gameName}</td>
+                    <td>${score.score}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 
 </body>

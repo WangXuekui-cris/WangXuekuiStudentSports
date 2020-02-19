@@ -20,6 +20,24 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        //取消报名
+        function cancel(gameID) {
+            $.ajax({
+                url:"userMenu/cancel?gameID="+gameID,
+                type:"post",
+                dataType:"text",
+                success:function (responseContent) {
+                    if("false" == responseContent){
+                        alert("当前阶段不能取消报名");
+                    }else {
+                        alert("取消报名成功");
+                        location.reload();
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <div style="text-align: center; font-size: 20pt; margin-top: 10px;">
@@ -40,14 +58,19 @@
                     <th>赛事名称</th>
                     <th>开始时间</th>
                     <th>结束时间</th>
+                    <th>操作</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${regInfoList}" var="reg">
                     <tr>
+                        <td style="display: none">${reg.gameID}</td>
                         <td>${reg.gameName}</td>
                         <td>${reg.startTime}</td>
                         <td>${reg.endTime}</td>
+                        <td>
+                            <button type="button" class="btn btn-default" onclick="cancel(${reg.gameID})">取消</button>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

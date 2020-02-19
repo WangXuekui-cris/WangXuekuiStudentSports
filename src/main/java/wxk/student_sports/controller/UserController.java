@@ -66,6 +66,23 @@ public class UserController {
             return "../../index";
         }
     }
+
+    /**
+     * 退出当前用户
+     * @param session
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout( HttpSession session){
+        session.invalidate();
+        return "../../index";
+    }
+
+    /**
+     * 获取赛事信息
+     * @param model
+     * @return
+     */
     @RequestMapping("/gameInfo")
     public String gameInfo(Model model){
         //获取所有的赛事信息
@@ -75,11 +92,6 @@ public class UserController {
         return "gameInfo";
     }
 
-
-    @RequestMapping("/gameResult")
-    public String gameResult(){
-        return "gameResult";
-    }
     @RequestMapping("/resultPrint")
     public String resultPrint(){
         return "resultPrint";

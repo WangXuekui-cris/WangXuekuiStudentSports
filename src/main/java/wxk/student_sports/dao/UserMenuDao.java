@@ -3,6 +3,7 @@ package wxk.student_sports.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.Score;
 
 import java.util.ArrayList;
 
@@ -27,4 +28,14 @@ public interface UserMenuDao {
     int getGameByUser(@Param("account")int account,@Param("gameID") int gameID);
     //报名赛事
     int signGame(@Param("account")int account,@Param("gameID")int Game);
+    //更新赛事报名人数
+    Integer updateGame(int gameId);
+    //查看赛事规则
+    String selectRule(int gameID);
+    //查询赛事成绩
+    ArrayList<Score> selectResult(int account);
+    //取消报名赛事
+    Integer cancel(@Param("account") int account, @Param("gameID") int gameID);
+    //更新取消报名后的赛事人数
+    Integer updateGameAfterCancel(int gameID);
 }
