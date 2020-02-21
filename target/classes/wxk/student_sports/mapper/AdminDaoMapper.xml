@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wxk.student_sports.dao.AdminDao">
+
+    <!--  更新赛事  -->
+    <update id="update">
+        update game
+        set gameName=#{gameName},startTime=#{startTime},endTime=#{endTime},totalNum=#{totalNum}
+        where gameID = #{gameID}
+    </update>
+
+    <!--  删除赛事  -->
+    <delete id="delete">
+        delete from game where gameID=#{gameID}
+    </delete>
+
+</mapper>

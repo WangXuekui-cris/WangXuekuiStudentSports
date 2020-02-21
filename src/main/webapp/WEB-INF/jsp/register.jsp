@@ -126,8 +126,9 @@
             }
     </script>
 
-    //检查表单 即如果用户不处理红色提示，点击注册之后没有反应
+
     <script type="text/javascript">
+        //检查表单 即如果用户不处理红色提示，点击注册之后没有反应
         function checkForm() {
             if(checkPwdLength()&&confirmPwd()&&checkName()&&checkAge()){
                 return true;

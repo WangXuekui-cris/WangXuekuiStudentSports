@@ -36,20 +36,23 @@
 				<div onclick="pageClick(this,'userMenu/userInfo')"><img src="img/icon-3.png" />
 					个人信息
 				</div>
-				<div onclick="pageClick(this,'userMenu/gameResult')"><img src="img/icon-3.png" />
+				<div onclick="pageClick(this,'userMenu/gameResult')"><img src="img/icon-4.png" />
 					赛事成绩
 				</div>
-				<div onclick="pageClick(this,'user/resultPrint')"><img src="img/icon-3.png" />
+				<div onclick="pageClick(this,'user/resultPrint')"><img src="img/icon-5.png" />
 					成绩打印
 				</div>
 				</c:if>
 				<c:if test="${user.userState == 1}">
-					<div onclick="pageClick(this,'user/gameInfo')" class="active"><img src="img/icon-1.png" />
-						用户信息
-					</div>
-					<div onclick="pageClick(this,'userMenu/userInfo')"><img src="img/icon-3.png" />
+					<div onclick="pageClick(this,'admin/gameInfo')" class="active"><img src="img/icon-1.png" />
 						赛事信息
 					</div>
+					<div onclick="pageClick(this,'admin/entryResult')"><img src="img/icon-5.png" />
+						录入成绩
+					</div>
+                    <div onclick="pageClick(this,'admin/userManage')"><img src="img/icon-3.png" />
+                        用户管理
+                    </div>
 				</c:if>
 			</div>
 		</div>
