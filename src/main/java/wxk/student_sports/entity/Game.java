@@ -20,17 +20,20 @@ public class Game {
     private Integer totalNum;
     //已报名的人数
     private Integer signNum;
+    //赛事规则
+    private String gameRule;
 
     public Game() {
     }
 
-    public Game(Integer gameID, String gameName, Timestamp startTime, Timestamp endTime, Integer totalNum, Integer signNum) {
+    public Game(Integer gameID, String gameName, Timestamp startTime, Timestamp endTime, Integer totalNum, Integer signNum,String gameRule) {
         this.gameID = gameID;
         this.gameName = gameName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.totalNum = totalNum;
         this.signNum = signNum;
+        this.gameRule = gameRule;
     }
 
     public Integer getGameID() {
@@ -81,6 +84,14 @@ public class Game {
         this.signNum = signNum;
     }
 
+    public String getGameRule() {
+        return gameRule;
+    }
+
+    public void setGameRule(String gameRule) {
+        this.gameRule = gameRule;
+    }
+
     @Override
     public String toString() {
         return "Game{" +
@@ -90,6 +101,7 @@ public class Game {
                 ", endTime=" + endTime +
                 ", totalNum=" + totalNum +
                 ", signNum=" + signNum +
+                ", gameRule=" + gameRule +
                 '}';
     }
 }

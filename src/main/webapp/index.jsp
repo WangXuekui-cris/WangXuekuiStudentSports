@@ -60,10 +60,11 @@
                 <img class="smallImg" src="img/icon2.png" />
                 <input placeholder="请输入密码" type="password" name="password" id="password_id" />
             </div>
+            <div>
             <span style="color: red">${msg}</span>
+            </div>
             <input type="submit" class="userBut" value="用户登录"/>
         </form>
-            <%--<button type="button" class="adminBut">管理员登录</button>--%>
             <button type="button" class="regBut">注册</button>
     </div>
 </div>

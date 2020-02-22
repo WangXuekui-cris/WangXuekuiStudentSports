@@ -23,6 +23,36 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<form class="form-horizontal" role="form"  method="post" action="admin/entry">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">学生账号</label>
+        <div class="col-sm-10" style="width: 30%">
+            <input type="text" class="form-control" name="sAccount" value="学生账号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">赛事名称：</label>
+        <div class="col-sm-10" style="width: 30%">
+            <select class="form-control" name="gID">
+                <c:forEach items="${gameList}" var="game">
+                    <option selected="selected" value="${game.gameID}">${game.gameName}</option>
+                </c:forEach>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">赛事成绩</label>
+        <div class="col-sm-10" style="width: 30%">
+            <input type="text" class="form-control" name="score" value="赛事成绩">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-primary" value="录入"/>
+            <span style="color: red">${msg}</span>
+            <span style="color: green">${sMsg}</span>
+        </div>
+    </div>
+</form>
 </body>
 </html>

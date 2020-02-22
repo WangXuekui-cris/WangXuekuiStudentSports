@@ -92,11 +92,6 @@ public class UserController {
         return "gameInfo";
     }
 
-    @RequestMapping("/resultPrint")
-    public String resultPrint(){
-        return "resultPrint";
-    }
-
     /**
      *
      * @param request 用于获取前台的输入的账号account

@@ -66,7 +66,7 @@
 
     <!--  查看赛事规则  -->
     <select id="selectRule" resultType="String">
-        select content from rule where gameID=#{gameID};
+        select gameRule from game where gameID=#{gameID};
     </select>
 
     <!--  查询指定账号的赛事成绩  -->

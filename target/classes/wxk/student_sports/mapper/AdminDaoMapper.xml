@@ -17,4 +17,84 @@
         delete from game where gameID=#{gameID}
     </delete>
 
+    <!--  添加赛事  -->
+    <insert id="addGame">
+        insert into game(gameName,startTime,endTime,totalNum,gameRule)
+        values(#{gameName},#{startTime},#{endTime},#{totalNum},#{gameRule})
+    </insert>
+
+    <!--  录入成绩  -->
+    <insert id="entry">
+        insert into score(sAccount,gID,score)
+        values(#{sAccount},#{gID},#{score})
+    </insert>
+
+    <!--  根据sAccount和gID查询成绩表中是否已存在  -->
+    <select id="selectByAccountAndGid" resultType="Integer">
+        select count(*) from score where sAccount = #{sAccount} and gID = #{gID}
+    </select>
+
+    <!--  查询所有的用户  -->
+    <resultMap id="AllUserMap" type="User">
+        <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <association property="academy" javaType="Academy">
+            <id property="academyId" column="academyId"/>
+            <result property="academyName" column="academyName"/>
+        </association>
+    </resultMap>
+    <select id="selectAllUser" resultMap="AllUserMap">
+        select s.id,s.account,s.name,s.age,s.gender,academy.academyName
+        from student s,academy
+        where s.academyId = academy.academyId and s.userState=2
+    </select>
+
+    <!--  根据id查询指定用户  -->
+    <resultMap id="AllUserMap2" type="User">
+        <id property="id" column="id"/>
+        <result property="account" column="account"/>
+        <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+        <association property="academy" javaType="Academy">
+            <id property="academyId" column="academyId"/>
+            <result property="academyName" column="academyName"/>
+        </association>
+    </resultMap>
+    <select id="selectByUserID" resultMap="AllUserMap2">
+        select s.id,s.account,s.password,s.name,s.age,s.gender,academy.academyName,academy.academyId
+        from student s,academy
+        where s.academyId = academy.academyId and s.id=#{id}
+    </select>
+
+    <!--  修改用户  -->
+    <update id="modify">
+        update  student
+        set password=#{password},name=#{name},age=#{age},gender=#{gender},academyId=#{academy.academyId}
+        where id = #{id}
+    </update>
+
+    <!--  删除报名信息  -->
+    <delete id="deleteRegInfo">
+        delete from reginfo where studentAccount=#{studentAccount}
+    </delete>
+
+    <!--  查询是否有成绩信息  -->
+    <select id="score" resultType="Integer">
+        select count(*) from score where sAccount=#{sAccount}
+    </select>
+
+    <!--  删除成绩信息  -->
+    <delete id="deleteScore">
+        delete from score where sAccount=#{sAccount}
+    </delete>
+
+    <!--  删除成绩信息  -->
+    <delete id="deleteUser">
+        delete from student where account=#{account}
+    </delete>
 </mapper>

@@ -69,7 +69,10 @@
                     location.href = "admin/delete?gameID=" + gameID;
                 }
             }
-
+        }
+    //  跳往增加赛事增加界面
+        function addGame() {
+            location.href="admin/addGame";
         }
     </script>
 </head>
@@ -110,5 +113,8 @@
     </c:forEach>
     </tbody>
 </table>
+<div style="text-align: center">
+<button type="button" class="btn btn-success" onclick="addGame()">增加赛事</button>
+</div>
 </body>
 </html>

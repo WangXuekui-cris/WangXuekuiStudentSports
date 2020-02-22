@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wxk.student_sports.dao.AdminDao;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.User;
 import wxk.student_sports.service.AdminService;
+
+import java.util.ArrayList;
 
 /**
  * @author 王学奎
@@ -38,5 +41,117 @@ public class AdminServiceImpl implements AdminService {
     public int delete(int gameID) {
         int delete = adminDao.delete(gameID);
         return delete;
+    }
+
+    /**
+     * 添加新的赛事
+     * @param game
+     * @return
+     */
+    @Override
+    public int addGame(Game game) {
+        int add = adminDao.addGame(game);
+        return add;
+    }
+
+    /**
+     * 录入成绩
+     * @param sAccount
+     * @param gID
+     * @param score
+     * @return
+     */
+    @Override
+    public int entryResult(Integer sAccount, Integer gID, String score) {
+        int entry = adminDao.entry(sAccount, gID, score);
+        return entry;
+    }
+
+    /**
+     * 根据账号和赛事ID查询是否存在记录
+     * @param sAccount
+     * @param gID
+     * @return
+     */
+    @Override
+    public int selectByAccountAndGid(Integer sAccount, Integer gID) {
+        int count = adminDao.selectByAccountAndGid(sAccount,gID);
+        return count;
+    }
+
+    /**
+     * 查询所有用户
+     * @return
+     */
+    @Override
+    public ArrayList<User> selectAllUser() {
+        ArrayList<User> users = adminDao.selectAllUser();
+        return users;
+    }
+
+    /**
+     * 根据id查询指定用户
+     * @param id
+     * @return
+     */
+    @Override
+    public User selectByUserID(int id) {
+        User user = adminDao.selectByUserID(id);
+        return user;
+    }
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    @Override
+    public int modify(User user) {
+        int modify = adminDao.modify(user);
+        return modify;
+    }
+
+    /**
+     * 根据账号删除报名信息
+     * @param userAccount
+     * @return
+     */
+    @Override
+    public int deleteRegInfo(int userAccount) {
+        int info = adminDao.deleteRegInfo(userAccount);
+        return info;
+    }
+
+    /**
+     * 查询该账户下是否有成绩信息
+     * @param sAccount
+     * @return
+     */
+    @Override
+    public int score(int sAccount) {
+        int score = adminDao.score(sAccount);
+        return score;
+    }
+
+    /**
+     * 删除成绩信息
+     * @param sAccount
+     * @return
+     */
+    @Override
+    public int deleteScore(int sAccount) {
+        int i = adminDao.deleteScore(sAccount);
+        return i;
+    }
+
+    /**
+     * 根据用户账号删除用户
+     * @param userAccount
+     * @return
+     */
+    @Override
+    public int deleteUser(int userAccount) {
+        int dUser = adminDao.deleteUser(userAccount);
+        return dUser;
     }
 }

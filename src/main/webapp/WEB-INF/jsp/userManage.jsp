@@ -21,8 +21,66 @@
     <script type="text/javascript" src="js/index.js" ></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        <%--   跳往修改界面     --%>
+        function modify(id) {
+            location.href = "admin/modify?id="+id;
+        }
+    //删除用户
+        function del() {
+            if(confirm("确定要删除吗？")) {
+                return true;
+            }else {
+                return false;
+            }
+        }
+        function remove(account) {
+            if(del()) {
+                $.ajax({
+                    url: "admin/removeUser",
+                    data: "account=" + account,
+                    dataType: "text",
+                    success: function (responseContent) {
+                        if(responseContent > 0){
+                            alert("删除成功!");
+                            location.reload();
+                        }else{
+                            alert("删除失败！")
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 </head>
 <body>
-
+<table class="table table-bordered" align="center">
+    <thead>
+    <tr>
+        <th>用户账号</th>
+        <th>用户姓名</th>
+        <th>用户年龄</th>
+        <th>用户性别</th>
+        <th>用户学院</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach items="${users}" var="user" varStatus="status">
+        <tr>
+            <td style="display: none">${user.id}</td>
+            <td>${user.account}</td>
+            <td>${user.name}</td>
+            <td>${user.age}</td>
+            <td>${user.gender}</td>
+            <td>${user.academy.academyName}</td>
+            <td>
+                <button type="button" class="btn btn-default" onclick="modify(${user.id})">修改</button>
+                <button type="button" class="btn btn-default" onclick="remove(${user.account})">删除</button>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 </body>
 </html>
