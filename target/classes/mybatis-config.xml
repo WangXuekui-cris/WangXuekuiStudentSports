@@ -17,6 +17,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="Score" type="wxk.student_sports.entity.Score"/>
 		<typeAlias alias="GameScores" type="wxk.student_sports.entity.GameScores"/>
 	</typeAliases>
+	<!--分页-->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
 	
 	<!--映射文件的设置  -->
 	<mappers>

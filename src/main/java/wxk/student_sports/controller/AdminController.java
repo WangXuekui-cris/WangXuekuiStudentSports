@@ -1,5 +1,7 @@
 package wxk.student_sports.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,11 +44,20 @@ public class AdminController {
      * @return
      */
     @RequestMapping("/gameInfo")
-    public String gameInfo(Model model){
+    public String gameInfo(Model model,Integer pageNum){
+        //设置分页
+        if(pageNum!=null){
+            PageHelper.startPage(pageNum, 5);
+        }else{
+            PageHelper.startPage(1,  5);
+        }
         //获取所有的赛事信息
         ArrayList<Game> gameList = userMenuService.getAllGame();
         //将赛事信息响应到前台
         model.addAttribute("gameList", gameList);
+        //将查询结果放入分页插件中
+        PageInfo<Game> pageInfo = new PageInfo<>(gameList);
+        model.addAttribute("pageInfo",pageInfo);
         return "adminGameInfo";
     }
 
@@ -121,9 +132,12 @@ public class AdminController {
      * @return
      */
     @RequestMapping("/result")
-    public String toResult(Model model){
+    public String toResult(Model model,Integer pageNum){
         ArrayList<Game> gameList = adminService.getGames();
         model.addAttribute("gameList",gameList);
+        //将查询结果放入分页插件中
+        PageInfo<Game> pageInfo = new PageInfo<>(gameList);
+        model.addAttribute("pageInfo",pageInfo);
         return "adminGameResult";
     }
 
@@ -131,9 +145,18 @@ public class AdminController {
      * 根据赛事ID显示它对应的成绩列表
      */
     @RequestMapping("/getGameScore")
-    public void getScore(HttpServletResponse response,String gameID) throws IOException {
+    public void getScore(HttpServletResponse response,String gameID,Integer pageNum,Model model) throws IOException {
+        //设置分页
+        if(pageNum!=null){
+            PageHelper.startPage(pageNum, 5);
+        }else{
+            PageHelper.startPage(1,  5);
+        }
         int gID = Integer.parseInt(gameID);
         ArrayList<GameScores> gameScore = adminService.getGameScoreByGid(gID);
+        //将查询结果放入分页插件中
+        PageInfo<GameScores> pageInfo = new PageInfo<>(gameScore);
+        model.addAttribute("pageInfo",pageInfo);
         Gson gson = new Gson();
         String json = gson.toJson(gameScore);
         response.getWriter().print(json);
@@ -209,9 +232,18 @@ public class AdminController {
      * @return
      */
     @RequestMapping("/userManage")
-    public String userManage(Model model){
+    public String userManage(Model model,Integer pageNum){
+        //设置分页
+        if(pageNum!=null){
+            PageHelper.startPage(pageNum, 5);
+        }else{
+            PageHelper.startPage(1,  5);
+        }
         ArrayList<User> userList = adminService.selectAllUser();
         model.addAttribute("users",userList);
+        //将查询结果放入分页插件中
+        PageInfo<User> pageInfo = new PageInfo<>(userList);
+        model.addAttribute("pageInfo",pageInfo);
         return "userManage";
     }
 

@@ -59,7 +59,7 @@
     <script type="text/javascript">
         //检查表单
         function checkForm() {
-            if(checkPWD()&&checkAccount()){
+            if(checkAccount()&&checkPWD()){
                 return true;
             }else {
                 return false;

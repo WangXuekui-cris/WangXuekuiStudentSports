@@ -1,5 +1,7 @@
 package wxk.student_sports.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +40,13 @@ public class UserMenuController {
      * @return
      */
     @RequestMapping("/userInfo")
-    public String userInfo(HttpSession session, Model model){
+    public String userInfo(HttpSession session, Model model,Integer pageNum){
+        //设置分页
+        if(pageNum!=null){
+            PageHelper.startPage(pageNum, 2);
+        }else{
+            PageHelper.startPage(1,  2);
+        }
         //获取session域中的用户对象，即登录对象
         User user = (User) session.getAttribute("user");
         Integer account = user.getAccount();
@@ -48,6 +56,9 @@ public class UserMenuController {
         if(checkNum > 0){
             ArrayList<Game> regInfoList = userMenuService.getAllRegInfo(account);
             model.addAttribute("regInfoList",regInfoList);
+            //将查询结果放入分页插件中
+            PageInfo<Game> pageInfo = new PageInfo<>(regInfoList);
+            model.addAttribute("pageInfo",pageInfo);
             return "userInfo";
         }else{//当报名记录<=0，说明该用户没有报名信息
             model.addAttribute("msg","您还没有报名任何赛事");

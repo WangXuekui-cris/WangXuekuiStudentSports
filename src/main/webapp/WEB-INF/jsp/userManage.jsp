@@ -82,5 +82,36 @@
     </c:forEach>
     </tbody>
 </table>
+<%--   分页     --%>
+<div class="page" style="text-align: center">
+    <ul class="pagination">
+        <c:choose>
+        <c:when test="${pageInfo.hasPreviousPage}">
+        <li><a href="admin/userManage?pageNum=1">首页</a>
+        <li><a href="admin/userManage?pageNum=${pageInfo.prePage}">上一页</a>
+            </c:when>
+            <c:otherwise>
+        <li class="active"><span>首页</span>
+        <li class="disabled"><span>上一页</span>
+            </c:otherwise>
+            </c:choose>
+            <c:forEach var = "index" begin="1" end="${pageInfo.pages}">
+        <li class="active"
+            <c:if test="${index==pageInfo.pageNum}"></c:if>>
+            <a href="admin/userManage?pageNum=${index}">${index}</a>
+
+            </c:forEach>
+            <c:choose>
+            <c:when test="${pageInfo.hasNextPage}">
+        <li><a href="admin/userManage?pageNum=${pageInfo.nextPage}">下一页</a>
+        <li><a href="admin/userManage?pageNum=${pageInfo.pages}">尾页</a>
+            </c:when>
+            <c:otherwise>
+        <li class="disabled"><span>下一页</span>
+        <li class="active"><span>尾页</span>
+            </c:otherwise>
+            </c:choose>
+    </ul>
+</div>
 </body>
 </html>

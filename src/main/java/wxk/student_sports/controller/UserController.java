@@ -1,5 +1,7 @@
 package wxk.student_sports.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -84,11 +86,20 @@ public class UserController {
      * @return
      */
     @RequestMapping("/gameInfo")
-    public String gameInfo(Model model){
+    public String gameInfo(Model model,Integer pageNum){
+        //设置分页
+        if(pageNum!=null){
+            PageHelper.startPage(pageNum, 5);
+        }else{
+            PageHelper.startPage(1,  5);
+        }
         //获取所有的赛事信息
         ArrayList<Game> gameList = userMenuService.getAllGame();
         //将赛事信息响应到前台
         model.addAttribute("gameList", gameList);
+        //将查询结果放入分页插件中
+        PageInfo<Game> pageInfo = new PageInfo<>(gameList);
+        model.addAttribute("pageInfo",pageInfo);
         return "gameInfo";
     }
 
