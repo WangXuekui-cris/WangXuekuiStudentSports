@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wxk.student_sports.dao.AdminDao;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.GameScores;
 import wxk.student_sports.entity.User;
 import wxk.student_sports.service.AdminService;
 
@@ -153,5 +154,38 @@ public class AdminServiceImpl implements AdminService {
     public int deleteUser(int userAccount) {
         int dUser = adminDao.deleteUser(userAccount);
         return dUser;
+    }
+
+    /**
+     *
+     * @return 获取已经录入成绩的赛事名称
+     */
+    @Override
+    public ArrayList<Game> getGames() {
+        ArrayList<Game> games = adminDao.getGames();
+        return games;
+    }
+
+    /**
+     * 根据赛事ID获取指定的成绩列表
+     * @param gID 赛事ID
+     * @return 成绩集合
+     */
+    @Override
+    public ArrayList<GameScores> getGameScoreByGid(int gID) {
+        ArrayList<GameScores> gameScore = adminDao.getGameScoreByGid(gID);
+        return gameScore;
+    }
+
+    /**
+     * 根据学生账号和赛事ID查询学生报名记录
+     * @param studentAccount
+     * @param gameID
+     * @return 返回记录数
+     */
+    @Override
+    public int selectCount(int studentAccount, int gameID) {
+        int count = adminDao.selectCount(studentAccount,gameID);
+        return count;
     }
 }

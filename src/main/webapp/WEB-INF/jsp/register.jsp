@@ -33,11 +33,13 @@
                     window.setTimeout (function(){
                         $("#userAccount").select().css("border-color","red");
                         });
+                    return false;
                 }else if(!reg.test(account)){//不符合格式提示弹窗
                     alert("请输入正确的学号");
                     window.setTimeout (function(){
                         $("#userAccount").select().css("border-color","red");
                     });
+                    return false;
                 }else {
                     $.ajax({
                         url: "user/check",//请求路径
@@ -51,9 +53,11 @@
                                 window.setTimeout (function(){
                                     $("#userAccount").select().css("border-color","red");
                                 });
+                                return false;
                             } else {
                                 $("#account_msg").text("");
                                 $("#userAccount").css("border-color","green");
+                                return true;
                             }
                         }
                     });
@@ -114,6 +118,7 @@
                 var userAge = $("#userAge").val();
                 if(!reg.test(userAge)){
                     alert("年龄必须为纯数字");
+                    return false;
                 }else if(userAge <= 15 || userAge >= 120){
                     $("#age_msg").text("年龄应该在15-120之间");
                     $("#userAge").css("border-color","false");

@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="student_sports:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/student_sports_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/student_sports</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>student_sports</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -42,7 +49,11 @@
           <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.6" />
           <element id="library" level="project" name="Maven: net.sf.ezmorph:ezmorph:1.0.6" />
           <element id="library" level="project" name="Maven: net.sf.json-lib:json-lib:jdk15:2.2.3" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.8.5" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/student_sports/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="student_sports/web/Web" />
     </root>

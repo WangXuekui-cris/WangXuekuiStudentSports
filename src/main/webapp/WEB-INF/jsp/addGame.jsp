@@ -85,19 +85,19 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事名称</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" name="gameName" value="赛事名称">
+            <input type="text" class="form-control" name="gameName" placeholder="赛事名称">
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事开始时间</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="startTime" name="startTime" onblur="checkStartTime()" value="如：2020-02-22 13:30:00">
+            <input type="text" class="form-control" id="startTime" name="startTime" onblur="checkStartTime()" placeholder="如：2020-02-22 13:30:00">
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事结束时间</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" id="endTime" name="endTime" onblur="checkEndTime()" value="如：2020-02-22 13:30:00">
+            <input type="text" class="form-control" id="endTime" name="endTime" onblur="checkEndTime()" placeholder="如：2020-02-22 13:30:00">
         </div>
     </div>
     <div class="form-group">

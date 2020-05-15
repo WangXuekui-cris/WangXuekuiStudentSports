@@ -24,26 +24,49 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-            //点击之后去往注册界面
             $(".regBut").click(function () {
-                location.href = "user/show_reg";
-            });
-            //判断账号非空
-            $("#userAccount_id").change(function () {
-                var username = $("#userAccount_id").val();
-                if(username == null || username == ""){
-                    alert("账户不能为空");
-                }
-            });
-            //判断密码非空
-            $("#password_id").change(function () {
-                var password = $("#password_id").val();
-                if(password == null || password == ""){
-                    alert("密码不能为空");
-                }
-            });
+                location.href="user/show_reg";
+            })
         })
     </script>
+    <script>
+        //判断账号非空并校验账号格式
+        function checkAccount() {
+            //学号格式为至少9位的纯数字
+            var reg = /^\d{9,}$/;
+            var username = $("#userAccount_id").val();
+            if (username == null || username == "") {
+                alert("账户不能为空！");
+                return false;
+            } else if (!reg.test(username)) {
+                alert("请输入符合格式的账号！")
+                return false;
+            }else{
+                return true;
+            }
+        }
+        //判断密码非空
+        function  checkPWD() {
+            var password = $("#password_id").val();
+            if(password == null || password == ""){
+                alert("密码不能为空");
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        //检查表单
+        function checkForm() {
+            if(checkPWD()&&checkAccount()){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    </script>
+
 </head>
 
 <body>
@@ -51,14 +74,14 @@
 <div class="content">
     <div class="login">
         <div class="title">登录</div>
-        <form action="user/login" method="post">
+        <form action="user/login" method="post" onsubmit="return checkForm();">
             <div class="line">
                 <img class="smallImg" src="img/icon1.png" />
-                <input placeholder="请输入账号" value="${user.account}" type="text" name="userAccount" id="userAccount_id" />
+                <input placeholder="请输入账号" value="${user.account}" type="text" name="userAccount" onchange="checkAccount()" id="userAccount_id" />
             </div>
             <div class="line">
                 <img class="smallImg" src="img/icon2.png" />
-                <input placeholder="请输入密码" type="password" name="password" id="password_id" />
+                <input placeholder="请输入密码" type="password" name="password" onchange="checkPWD()" id="password_id" />
             </div>
             <div>
             <span style="color: red">${msg}</span>

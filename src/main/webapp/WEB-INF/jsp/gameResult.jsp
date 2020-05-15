@@ -15,7 +15,7 @@
 <base href="<%=basePath%>">
 <html>
 <head>
-    <title>成绩打印</title>
+    <title>赛事成绩</title>
     <link rel="stylesheet" href="css/page.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">

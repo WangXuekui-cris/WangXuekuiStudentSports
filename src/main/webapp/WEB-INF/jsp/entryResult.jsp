@@ -21,19 +21,63 @@
     <script type="text/javascript" src="js/index.js" ></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function checkAccount() {
+            //学号格式为至少9位的纯数字
+            var reg = /^\d{9,}$/;
+            var sAccount = $("#sAccount").val();
+            if(sAccount == null || sAccount == ""){
+                alert("学生账号不能为空！");
+                return false;
+            }else if(!reg.test(sAccount)){
+                alert("学生账号不符合要求！");
+                return false;
+            }else{
+                return true;
+            }
+        }
+
+        //检查该账号在该赛事中是否有报名
+        function checkAccountByGid() {
+            var account = $("#sAccount").val();
+            var gID = $("#gID").val();
+            $.ajax({
+                url:"admin/check",
+                data: {"account":account,"gID":gID},
+                dataType: "text",
+                success: function (responseContent) {
+                    if(responseContent == 0){
+                        $("#msg").html("该学生并未参加此项比赛！");
+                        return false;
+                    }else {
+                        return true;
+                    }
+                }
+            });
+
+        }
+        //检查表单
+        function checkForm() {
+            if(checkAccount()&&checkAccountByGid()){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
-<form class="form-horizontal" role="form"  method="post" action="admin/entry">
+<form class="form-horizontal" role="form" onsubmit="checkForm()"  method="post" action="admin/entry">
     <div class="form-group">
         <label class="col-sm-2 control-label">学生账号</label>
         <div class="col-sm-10" style="width: 30%">
-            <input type="text" class="form-control" name="sAccount" value="学生账号">
+            <input type="text" class="form-control" name="sAccount" id="sAccount" onblur="checkAccount()" placeholder="学生账号">
         </div>
     </div>
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事名称：</label>
         <div class="col-sm-10" style="width: 30%">
-            <select class="form-control" name="gID">
+            <select class="form-control" name="gID" id="gID">
                 <c:forEach items="${gameList}" var="game">
                     <option selected="selected" value="${game.gameID}">${game.gameName}</option>
                 </c:forEach>
@@ -43,7 +87,8 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事成绩</label>
         <div class="col-sm-10" style="width: 30%">
-            <input type="text" class="form-control" name="score" value="赛事成绩">
+            <input type="text" class="form-control" name="score" onfocus="checkAccountByGid()" placeholder="赛事成绩">
+            <span id="msg" style="color: red"></span>
         </div>
     </div>
     <div class="form-group">

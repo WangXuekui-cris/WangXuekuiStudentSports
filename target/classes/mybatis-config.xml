@@ -15,6 +15,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias alias="Academy" type="wxk.student_sports.entity.Academy"/>
 		<typeAlias alias="Game" type="wxk.student_sports.entity.Game"/>
 		<typeAlias alias="Score" type="wxk.student_sports.entity.Score"/>
+		<typeAlias alias="GameScores" type="wxk.student_sports.entity.GameScores"/>
 	</typeAliases>
 	
 	<!--映射文件的设置  -->

@@ -3,6 +3,7 @@ package wxk.student_sports.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import wxk.student_sports.entity.Game;
+import wxk.student_sports.entity.GameScores;
 import wxk.student_sports.entity.User;
 
 import java.util.ArrayList;
@@ -40,4 +41,11 @@ public interface AdminDao {
     int deleteScore(int sAccount);
     //删除用户
     int deleteUser(int userAccount);
+    //获取已经录入赛事成绩的赛事名称
+    ArrayList<Game> getGames();
+    //根据赛事ID获取指定的成绩列表
+    ArrayList<GameScores> getGameScoreByGid(int gID);
+    //根据学生账号和赛事ID查询学生报名记录
+    //int selectCount(@Param("studentAccount") int studentAccount, @Param("gameID") int gameID);
+    int selectCount( int studentAccount, int gameID);
 }

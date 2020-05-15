@@ -93,8 +93,25 @@
         delete from score where sAccount=#{sAccount}
     </delete>
 
-    <!--  删除成绩信息  -->
+    <!--  删除用户信息信息  -->
     <delete id="deleteUser">
         delete from student where account=#{account}
     </delete>
+
+    <!--  获取已录入成绩的赛事名称  -->
+    <select id="getGames" resultType="Game">
+        select distinct gameID,gameName from game g,score s where g.gameID=s.gID
+    </select>
+
+    <!--  根据赛事ID获取成绩列表  -->
+    <select id="getGameScoreByGid" resultType="GameScores">
+        SELECT g.gameName,s.account,s.`name`,sc.score,(@rowNum:=@rowNum+1) as scoreNo
+        FROM game g,student s,score sc,(select (@rowNum :=0) ) b
+        where g.gameID = sc.gID and s.account=sc.sAccount AND sc.gID=#{gID} ORDER BY sc.score
+    </select>
+
+    <!--  根据学生账号和赛事ID查询学生报名记录  -->
+    <select id="selectCount" resultType="Integer">
+        select count(*) from reginfo where studentAccount=#{arg0} and gameID=#{arg1}
+    </select>
 </mapper>

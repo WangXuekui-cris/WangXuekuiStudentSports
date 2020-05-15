@@ -1,12 +1,11 @@
 package wxk.student_sports.controller;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import wxk.student_sports.entity.Academy;
-import wxk.student_sports.entity.Game;
-import wxk.student_sports.entity.User;
+import wxk.student_sports.entity.*;
 import wxk.student_sports.service.AdminService;
 import wxk.student_sports.service.UserMenuService;
 import wxk.student_sports.service.UserService;
@@ -117,6 +116,30 @@ public class AdminController {
     }
 
     /**
+     * 获得已经录入成绩的赛事
+     * @param model
+     * @return
+     */
+    @RequestMapping("/result")
+    public String toResult(Model model){
+        ArrayList<Game> gameList = adminService.getGames();
+        model.addAttribute("gameList",gameList);
+        return "adminGameResult";
+    }
+
+    /**
+     * 根据赛事ID显示它对应的成绩列表
+     */
+    @RequestMapping("/getGameScore")
+    public void getScore(HttpServletResponse response,String gameID) throws IOException {
+        int gID = Integer.parseInt(gameID);
+        ArrayList<GameScores> gameScore = adminService.getGameScoreByGid(gID);
+        Gson gson = new Gson();
+        String json = gson.toJson(gameScore);
+        response.getWriter().print(json);
+    }
+
+    /**
      * 带着已结束赛事信息到录入成绩界面
      * @param model
      * @return
@@ -138,6 +161,21 @@ public class AdminController {
         }
         model.addAttribute("gameList",gameList);
         return "entryResult";
+    }
+
+    /**
+     * 根据学生账号和赛事ID查询学生报名记录
+     * @param response
+     * @param account
+     * @param gID
+     * @throws IOException
+     */
+    @RequestMapping("/check")
+    public void check(HttpServletResponse response,String account,String gID) throws IOException {
+        int studentAccount = Integer.parseInt(account);
+        int gameID = Integer.parseInt(gID);
+        int count = adminService.selectCount(studentAccount, gameID);
+        response.getWriter().print(count);
     }
 
     /**
