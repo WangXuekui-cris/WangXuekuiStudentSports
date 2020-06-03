@@ -31,7 +31,6 @@
                 return false;
             }else if(!reg.test(sAccount)){
                 alert("学生账号不符合要求！");
-                alert("1false");
                 return false;
             }else{
                 return true;
@@ -40,13 +39,17 @@
 
         //检查该账号在该赛事中是否有报名
         function checkAccountByGid() {
+            $("#aMSG").text("");
+            $("#sMSG").text("");
             var account = $("#sAccount").val();
             var gID = $("#gID").val();
-            var tag=0;
+            var tag;
             $.ajax({
                 url:"admin/checks",
+                type:"get",
                 data: {"account":account,"gID":gID},
-                dataType: "text",
+                dataType: 'text',
+                async: false,
                 success: function (responseContent) {
                     if(responseContent == 0){
                         $("#msg").html("该学生并未参加此项比赛！");
@@ -59,25 +62,27 @@
             });
             if(tag==0){
                 return false;
-            }else{
+            }else if(tag==1){
                 return true;
             }
         }
 
-        function checkScore() {
-            var reg=/^([0-5][0-9])$/;
-            var mScore = $("#mScore").val();
-            var sScore = $("#sScore").val();
-            if(!reg.test(mScore)|| !reg.test(sScore)){
-                alert("请输入合法的时间！");
-                return false;
-            }else{
-                return true;
-            }
-        }
+        // function checkScore() {
+        //     var reg=/^([0-5][0-9])$/;
+        //     var msReg=/^(0|[1-9]\d\d|1000)$/;
+        //     var mScore = $("#mScore").val();
+        //     var sScore = $("#sScore").val();
+        //     var msScore = $("#msScore").val();
+        //     if(!reg.test(mScore)|| !reg.test(sScore) || !msReg.test(msScore)){
+        //         alert("请输入合法的时间！");
+        //         return false;
+        //     }else{
+        //         return true;
+        //     }
+        // }
         //检查表单
         function checkForm() {
-            if(checkAccount()&&checkAccountByGid()&&checkScore()){
+            if(checkAccount()&&checkAccountByGid()){
                 return true;
             }else {
                 return false;
@@ -106,18 +111,15 @@
     <div class="form-group">
         <label class="col-sm-2 control-label">赛事成绩</label>
         <div class="col-sm-10" style="width: 30%">
-            <input type="text" style="width: 20%" name="mScore" id="mScore" onfocus="checkAccountByGid()" placeholder="如：05">
-            分
-            <input type="text" style="width: 20%" name="sScore" id="sScore" onblur="checkScore()"  placeholder="如：05">
-            秒
+            <input type="text" class="form-control" onfocus="checkAccountByGid()" name="score" id="score" placeholder="赛事成绩">
             <span id="msg" style="color: red"></span>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <input type="submit" class="btn btn-primary" value="录入"/>
-            <span style="color: red">${msg}</span>
-            <span style="color: green">${sMsg}</span>
+            <span style="color: red" id="aMSG">${msg}</span>
+            <span style="color: green" id="sMSG">${sMsg}</span>
         </div>
     </div>
 </form>

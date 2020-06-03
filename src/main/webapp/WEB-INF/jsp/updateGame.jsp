@@ -32,13 +32,11 @@
             var start = new Date(startTime).valueOf();
             if(!reg.test(startTime)){
                 alert("格式错误！");
-                window.setTimeout (function(){
-                    $("#startTime").css("border-color","red");
-                });
+                $("#startTime").css("border-color","red");
                 return false;
             }else if(start <= currentDate){
                 alert("开始时间不能小于当前时间！");
-                    $("#startTime").css("border-color","red");
+                $("#startTime").css("border-color","red");
                 return false;
             }else{
                 $("#startTime").css("border-color","green");
@@ -98,13 +96,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">赛事开始时间</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="startTime" name="startTime" onblur="checkStartTime()" value="${game.startTime}">
+                <input type="text" class="form-control" id="startTime" name="startTime" onchange="checkStartTime()" value="${game.startTime}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">赛事结束时间</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="endTime" name="endTime" onblur="checkEndTime()" value="${game.endTime}">
+                <input type="text" class="form-control" id="endTime" name="endTime" onchange="checkEndTime()" value="${game.endTime}">
             </div>
         </div>
         <div class="form-group">

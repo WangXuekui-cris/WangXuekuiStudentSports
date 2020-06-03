@@ -121,7 +121,7 @@
                     return false;
                 }else if(userAge <= 15 || userAge >= 120){
                     $("#age_msg").text("年龄应该在15-120之间");
-                    $("#userAge").css("border-color","false");
+                    $("#userAge").css("border-color","red");
                     return false;
                 }else{
                     $("#age_msg").text("");
@@ -172,7 +172,7 @@
                 <div class="form-group">
                     <label for="userName" class="col-sm-2 control-label">姓名：</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="userName" name="name" placeholder="请输入姓名" onblur="checkName()">
+                        <input type="text" class="form-control" id="userName" name="name" placeholder="请输入姓名" onchange="checkName()">
                     </div>
                 </div>
                 <div class="form-group">

@@ -194,11 +194,12 @@ public class AdminController {
      * @throws IOException
      */
     @RequestMapping("/checks")
-    public void check(HttpServletResponse response,String account,String gID) throws IOException {
+    public int check(HttpServletResponse response,String account,String gID) throws IOException {
         int studentAccount = Integer.parseInt(account);
         int gameID = Integer.parseInt(gID);
         int count = adminService.selectCount(studentAccount, gameID);
         response.getWriter().print(count);
+        return count;
     }
 
     /**
@@ -212,9 +213,10 @@ public class AdminController {
         //获得前台输入的参数
         Integer sAccount = Integer.parseInt(request.getParameter("sAccount"));
         Integer gID = Integer.parseInt(request.getParameter("gID"));
-        String mScore = request.getParameter("mScore");
-        String sScore = request.getParameter("sScore");
-        String score = mScore+"分"+sScore+"秒";
+        //String mScore = request.getParameter("mScore");
+        //String sScore = request.getParameter("sScore");
+        //String msScore = request.getParameter("msScore");
+        String score = request.getParameter("score");
         //根据账号和赛事ID判断是否已经插入该成绩
         int count = adminService.selectByAccountAndGid(sAccount,gID);
         //count>0说明存在相同记录，否则可以录入

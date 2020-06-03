@@ -80,8 +80,8 @@
                 <ul class="pagination">
                     <c:choose>
                     <c:when test="${pageInfo.hasPreviousPage}">
-                    <li><a href="user/userInfo?pageNum=1">首页</a>
-                    <li><a href="user/userInfo?pageNum=${pageInfo.prePage}">上一页</a>
+                    <li><a href="userMenu/userInfo?pageNum=1">首页</a>
+                    <li><a href="userMenu/userInfo?pageNum=${pageInfo.prePage}">上一页</a>
                         </c:when>
                         <c:otherwise>
                     <li class="active"><span>首页</span>
@@ -91,13 +91,12 @@
                         <c:forEach var = "index" begin="1" end="${pageInfo.pages}">
                     <li class="active"
                         <c:if test="${index==pageInfo.pageNum}"></c:if>>
-                        <a href="user/userInfo?pageNum=${index}">${index}</a>
-
+                        <a href="userMenu/userInfo?pageNum=${index}">${index}</a>
                         </c:forEach>
                         <c:choose>
                         <c:when test="${pageInfo.hasNextPage}">
-                    <li><a href="user/userInfo?pageNum=${pageInfo.nextPage}">下一页</a>
-                    <li><a href="user/userInfo?pageNum=${pageInfo.pages}">尾页</a>
+                    <li><a href="userMenu/userInfo?pageNum=${pageInfo.nextPage}">下一页</a>
+                    <li><a href="userMenu/userInfo?pageNum=${pageInfo.pages}">尾页</a>
                         </c:when>
                         <c:otherwise>
                     <li class="disabled"><span>下一页</span>

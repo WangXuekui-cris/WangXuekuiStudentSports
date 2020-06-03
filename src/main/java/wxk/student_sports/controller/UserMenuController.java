@@ -41,12 +41,6 @@ public class UserMenuController {
      */
     @RequestMapping("/userInfo")
     public String userInfo(HttpSession session, Model model,Integer pageNum){
-        //设置分页
-        if(pageNum!=null){
-            PageHelper.startPage(pageNum, 2);
-        }else{
-            PageHelper.startPage(1,  2);
-        }
         //获取session域中的用户对象，即登录对象
         User user = (User) session.getAttribute("user");
         Integer account = user.getAccount();
@@ -54,6 +48,12 @@ public class UserMenuController {
         int checkNum = userMenuService.checkAllRegInfo(account);
         //如果checkNum大于0.说明有报名信息
         if(checkNum > 0){
+            //设置分页
+            if(pageNum!=null){
+                PageHelper.startPage(pageNum, 5);
+            }else{
+                PageHelper.startPage(1,  5);
+            }
             ArrayList<Game> regInfoList = userMenuService.getAllRegInfo(account);
             model.addAttribute("regInfoList",regInfoList);
             //将查询结果放入分页插件中

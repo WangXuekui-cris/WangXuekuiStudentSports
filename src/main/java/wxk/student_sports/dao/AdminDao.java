@@ -46,6 +46,5 @@ public interface AdminDao {
     //根据赛事ID获取指定的成绩列表
     ArrayList<GameScores> getGameScoreByGid(int gID);
     //根据学生账号和赛事ID查询学生报名记录
-    //int selectCount(@Param("studentAccount") int studentAccount, @Param("gameID") int gameID);
-    int selectCount( int studentAccount, int gameID);
+    int selectCount(int studentAccount, int gameID);
 }
